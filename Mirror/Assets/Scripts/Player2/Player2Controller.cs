@@ -12,7 +12,9 @@ public class Player2Controller : MonoBehaviour
 
     public float speed;
 
-    public bool canMove;
+    public bool canMove,freeze;
+
+    public PlayerController  PlayerController;
 
     //public bool up, up2, down, down2, left, left2, right, right2;
 
@@ -26,7 +28,9 @@ public class Player2Controller : MonoBehaviour
         canMove = true;
         rb = GetComponent<Rigidbody2D>();
         rb2 = Character.GetComponent<Rigidbody2D>();
-        speed = 100f;
+        speed = 20f;
+
+        PlayerController = GameObject.Find("Character1").GetComponent<PlayerController>();
 
        
 
@@ -40,60 +44,63 @@ public class Player2Controller : MonoBehaviour
         
 
         //= Vector3.Distance(transform.position, col.transform.position);
-        if(canMove)
+        if(freeze)
         {
-            
-            GameManager.pauseTime2 = false;
+            if(canMove)
+            {
+                
+                GameManager.pauseTime2 = false;
 
-            /*if(up&&up2)
-            {*/
-                if(Input.GetKey(KeyCode.W))
-                {
-                    
-                    rb.velocity = new Vector2(0, 20);
-                    rb2.velocity = new Vector2(0, -20);
-                    canMove = false;
-                }
-            /*}
-            
-            if(left&&left2)
-            {*/
-                if(Input.GetKey(KeyCode.A))
-                {
-                    
-                    rb.velocity = new Vector2(-20, 0);
-                    rb2.velocity = new Vector2(20, 0);
-                    canMove = false;
-                }
-            /*}
+                /*if(up&&up2)
+                {*/
+                    if(Input.GetKey(KeyCode.W))
+                    {
+                        
+                        rb.velocity = new Vector2(0, speed);
+                        rb2.velocity = new Vector2(0, -speed);
+                        canMove = false;
+                    }
+                /*}
+                
+                if(left&&left2)
+                {*/
+                    if(Input.GetKey(KeyCode.A))
+                    {
+                        
+                        rb.velocity = new Vector2(-speed, 0);
+                        rb2.velocity = new Vector2(speed, 0);
+                        canMove = false;
+                    }
+                /*}
 
-            if(down&&down2)
-            {*/
-                if(Input.GetKey(KeyCode.S))
-                {
-                    
-                    rb.velocity = new Vector2(0, -20);
-                    rb2.velocity = new Vector2(0, 20);
-                    canMove = false;
-                    
-                }
-            /*}
+                if(down&&down2)
+                {*/
+                    if(Input.GetKey(KeyCode.S))
+                    {
+                        
+                        rb.velocity = new Vector2(0, -speed);
+                        rb2.velocity = new Vector2(0, speed);
+                        canMove = false;
+                        
+                    }
+                /*}
 
-            if(right&&right2)
-            {*/
-                if(Input.GetKey(KeyCode.D))
-                {
-                    
-                    rb.velocity = new Vector2(20, 0);
-                    rb2.velocity = new Vector2(-20, 0);
-                    canMove = false;
-                }
-            //}
-        }
-        else
-        {
-            
-            GameManager.pauseTime2 = true;
+                if(right&&right2)
+                {*/
+                    if(Input.GetKey(KeyCode.D))
+                    {
+                        
+                        rb.velocity = new Vector2(speed, 0);
+                        rb2.velocity = new Vector2(-speed, 0);
+                        canMove = false;
+                    }
+                //}
+            }
+            else
+            {
+                
+                GameManager.pauseTime2 = true;
+            }
         }
 
         
@@ -128,6 +135,18 @@ public class Player2Controller : MonoBehaviour
             
         }
 
+        if(col.tag == "Clock")
+        {
+            StartCoroutine(PlayerController.clock());
+            Destroy(col.gameObject);
+        }
+
+        if(col.tag == "Arrows")
+        {
+            StartCoroutine(PlayerController.arrows());
+            Destroy(col.gameObject);
+        }
+
         
     }
 
@@ -143,5 +162,21 @@ public class Player2Controller : MonoBehaviour
             
             
         }
+    }
+
+    public IEnumerator clock()
+    {
+        freeze = true;
+        yield return new WaitForSeconds(5f);
+        freeze = false;
+        StopCoroutine(clock());
+    }
+
+    public IEnumerator arrows()
+    {
+        speed*=-1;
+        yield return new WaitForSeconds(5f);
+        speed*=-1;
+        StopCoroutine(arrows());
     }
 }

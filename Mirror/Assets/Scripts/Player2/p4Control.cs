@@ -10,6 +10,8 @@ public class p4Control : MonoBehaviour
 
     public Rigidbody2D rb;
 
+    public PlayerController  PlayerController;
+
     
 
     // Start is called before the first frame update
@@ -17,7 +19,7 @@ public class p4Control : MonoBehaviour
     {
         GameMan = GameObject.Find("Game Manager");
         GameManager = GameMan.GetComponent<GameManager>();
-
+         PlayerController = GameObject.Find("Character1").GetComponent<PlayerController>();
         
         rb = GetComponent<Rigidbody2D>();
     }
@@ -47,6 +49,18 @@ public class p4Control : MonoBehaviour
             GameManager.coin2.transform.position = GameManager.coinLo2;
 
             
+        }
+
+        if(fork.tag == "Clock")
+        {
+            StartCoroutine(PlayerController.clock());
+            Destroy(fork.gameObject);
+        }
+
+        if(fork.tag == "Arrows")
+        {
+            StartCoroutine(PlayerController.arrows());
+            Destroy(fork.gameObject);
         }
     }
 }

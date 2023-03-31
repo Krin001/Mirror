@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 
     public GameManager GameManager;
 
+    public Player2Controller  Player2Controller;
+
     public Rigidbody2D rb, rb2;
 
     public float speed;
 
-    public bool canMove;
+    public bool canMove,freeze;
 
     //public bool up, up2, down, down2, left, left2, right, right2;
 
@@ -27,7 +29,9 @@ public class PlayerController : MonoBehaviour
         canMove = true;
         rb = GetComponent<Rigidbody2D>();
         rb2 = Character.GetComponent<Rigidbody2D>();
-        speed = 100f;
+        speed = 20f;
+
+        Player2Controller = GameObject.Find("Character3").GetComponent<Player2Controller>();
 
        
 
@@ -41,62 +45,65 @@ public class PlayerController : MonoBehaviour
         
 
         //= Vector3.Distance(transform.position, col.transform.position);
-        if(canMove)
+        if(!freeze)
         {
-            GameManager.pauseTime1 = false;
+            if(canMove)
+            {
+                GameManager.pauseTime1 = false;
 
-            /*if(up&&up2)
-            {*/
-                if(Input.GetKey(KeyCode.UpArrow))
-                {
-                    
-                    rb.velocity = new Vector2(0, 20);
-                    rb2.velocity = new Vector2(0, -20);
-                    canMove = false;
-                }
-            /*}
+                /*if(up&&up2)
+                {*/
+                    if(Input.GetKey(KeyCode.UpArrow))
+                    {
+                        
+                        rb.velocity = new Vector2(0, speed);
+                        rb2.velocity = new Vector2(0, -speed);
+                        canMove = false;
+                    }
+                /*}
+                
+                if(left&&left2)
+                {*/
+                    if(Input.GetKey(KeyCode.LeftArrow))
+                    {
+                        
+                        rb.velocity = new Vector2(-speed, 0);
+                        rb2.velocity = new Vector2(speed, 0);
+                        canMove = false;
+                    }
+                /*}
+
+                if(down&&down2)
+                {*/
+                    if(Input.GetKey(KeyCode.DownArrow))
+                    {
+                        
+                        rb.velocity = new Vector2(0, -speed);
+                        rb2.velocity = new Vector2(0, speed);
+                        canMove = false;
+                        
+                    }
+                /*}
+
+                if(right&&right2)
+                {*/
+                    if(Input.GetKey(KeyCode.RightArrow))
+                    {
+                        
+                        rb.velocity = new Vector2(speed, 0);
+                        rb2.velocity = new Vector2(-speed, 0);
+                        canMove = false;
+                    }
+                //}
+            }
+            else
+            {
+                GameManager.pauseTime1 = true;
+            }
+        }
+
             
-            if(left&&left2)
-            {*/
-                if(Input.GetKey(KeyCode.LeftArrow))
-                {
-                    
-                    rb.velocity = new Vector2(-20, 0);
-                    rb2.velocity = new Vector2(20, 0);
-                    canMove = false;
-                }
-            /*}
-
-            if(down&&down2)
-            {*/
-                if(Input.GetKey(KeyCode.DownArrow))
-                {
-                    
-                    rb.velocity = new Vector2(0, -20);
-                    rb2.velocity = new Vector2(0, 20);
-                    canMove = false;
-                    
-                }
-            /*}
-
-            if(right&&right2)
-            {*/
-                if(Input.GetKey(KeyCode.RightArrow))
-                {
-                    
-                    rb.velocity = new Vector2(20, 0);
-                    rb2.velocity = new Vector2(-20, 0);
-                    canMove = false;
-                }
-            //}
-        }
-        else
-        {
-            GameManager.pauseTime1 = true;
-        }
-
-        
-        
+            
     }
 
 
@@ -127,6 +134,22 @@ public class PlayerController : MonoBehaviour
             
         }
 
+        if(col.tag == "Clock")
+        {
+            StartCoroutine(Player2Controller.clock());
+            Destroy(col.gameObject);
+        }
+
+        if(col.tag == "Arrows")
+        {
+            StartCoroutine(Player2Controller.arrows());
+            Destroy(col.gameObject);
+        }
+
+        
+
+
+
         
     }
 
@@ -142,5 +165,21 @@ public class PlayerController : MonoBehaviour
             
             
         }
+    }
+
+    public IEnumerator clock()
+    {
+        freeze = true;
+        yield return new WaitForSeconds(5f);
+        freeze = false;
+        StopCoroutine(clock());
+    }
+
+    public IEnumerator arrows()
+    {
+        speed*=-1;
+        yield return new WaitForSeconds(10f);
+        speed*=-1;
+        StopCoroutine(arrows());
     }
 }

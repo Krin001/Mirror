@@ -11,6 +11,8 @@ TagManager:
   - Background
   - Wall
   - Test
+  - Clock
+  - Arrows
   layers:
   - Default
   - TransparentFX

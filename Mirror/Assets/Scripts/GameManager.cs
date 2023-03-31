@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     public GameObject[] coinP2 = new GameObject[66];
     public Vector3 coinLo1, coinLo2;
 
+    public float powerTimer; 
+    public float randomPowerUp;
+    public float powerUpLoc;
+    public GameObject[]powerUp = new GameObject[4];
+
     //Player 1 paths
     public float pathTime1;
 
@@ -151,8 +156,94 @@ public class GameManager : MonoBehaviour
         }
 
 
+        powerTimer += Time.deltaTime;
 
+        if(powerTimer >= 10)
+        {
+            pow();
+        }
         
+    }
+
+    public void pow()
+    {
+        powerTimer = 0f;
+        randomPowerUp = Random.Range(0,3);
+
+        if(randomPowerUp == 0)
+        {
+            List<GameObject>powerLo = new List<GameObject>();
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP2[i]);
+            }
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP1[i]);
+            }
+            powerUpLoc = Random.Range(0f,65f);
+            Instantiate(powerUp[(int) randomPowerUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
+
+            
+
+            
+        }
+
+        else if(randomPowerUp == 1)
+        {
+            List<GameObject>powerLo = new List<GameObject>();
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP2[i]);
+            }
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP1[i]);
+            }
+            powerUpLoc = Random.Range(0f,65f);
+            Instantiate(powerUp[(int) randomPowerUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
+
+            
+
+            
+        }
+
+        else if(randomPowerUp == 2)
+        {
+            List<GameObject>powerLo = new List<GameObject>();
+            for(int i = 0; i < 33; i++)
+            {
+                powerLo.Add(coinP2[i]);
+            }
+            for(int i = 0; i < 33; i++)
+            {
+                powerLo.Add(coinP1[i]);
+            }
+            powerUpLoc = Random.Range(0f,65f);
+            Instantiate(powerUp[(int) randomPowerUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
+
+            
+
+            
+        }
+
+        else if(randomPowerUp == 3)
+        {
+            List<GameObject>powerLo = new List<GameObject>();
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP2[i]);
+            }
+            for(int i = 33; i < 66; i++)
+            {
+                powerLo.Add(coinP1[i]);
+            }
+            powerUpLoc = Random.Range(0f,65f);
+            Instantiate(powerUp[(int) randomPowerUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
+
+
+            
+        }
     }
 
     public void p1Paths()

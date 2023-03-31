@@ -8,6 +8,8 @@ public class pControl : MonoBehaviour
 
     public GameManager GameManager;
 
+    public Player2Controller  Player2Controller;
+
     public Rigidbody2D rb;
 
     
@@ -17,6 +19,7 @@ public class pControl : MonoBehaviour
     {
         GameMan = GameObject.Find("Game Manager");
         GameManager = GameMan.GetComponent<GameManager>();
+        Player2Controller = GameObject.Find("Character3").GetComponent<Player2Controller>();
 
         
         rb = GetComponent<Rigidbody2D>();
@@ -47,6 +50,18 @@ public class pControl : MonoBehaviour
             GameManager.coin1.transform.position = GameManager.coinLo1;
 
             
+        }
+
+        if(fork.tag == "Clock")
+        {
+            StartCoroutine(Player2Controller.clock());
+            Destroy(fork.gameObject);
+        }
+
+        if(fork.tag == "Arrows")
+        {
+            StartCoroutine(Player2Controller.arrows());
+            Destroy(fork.gameObject);
         }
     }
 }
