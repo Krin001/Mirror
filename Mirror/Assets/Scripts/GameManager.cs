@@ -280,8 +280,8 @@ public class GameManager : MonoBehaviour
         List<GameObject>p1PaWhi = new List<GameObject>();
         for(int i = 0; i < 44; i++)
         {
-            p1Path1[i].GetComponent<rPathsBlack>().closed = false;
-            p1Path2[i].GetComponent<rPathsWhite>().closed = false;
+            p1Path1[i].GetComponent<rPaths>().closed = false;
+            p1Path2[i].GetComponent<rPaths>().closed = false;
             p1PaBla.Add(p1Path1[i]);
             p1PaWhi.Add(p1Path2[i]);
         }
@@ -294,10 +294,10 @@ public class GameManager : MonoBehaviour
             float pathNum2 = p1PaWhi.Count;
             float close2 = Random.Range(0f,pathNum2);
 
-            p1PaBla[(int) close].GetComponent<rPathsBlack>().closed = true;
+            p1PaBla[(int) close].GetComponent<rPaths>().closed = true;
             p1PaBla.Remove(p1PaBla[(int) close]);
 
-            p1PaWhi[(int) close2].GetComponent<rPathsWhite>().closed = true;
+            p1PaWhi[(int) close2].GetComponent<rPaths>().closed = true;
             p1PaWhi.Remove(p1PaWhi[(int) close2]);
         }
 
@@ -311,8 +311,8 @@ public class GameManager : MonoBehaviour
         List<GameObject>p2PaWhi = new List<GameObject>();
         for(int i = 0; i < 44; i++)
         {
-            p2Path1[i].GetComponent<rPathsBlack>().closed = false;
-            p2Path2[i].GetComponent<rPathsWhite>().closed = false;
+            p2Path1[i].GetComponent<rPaths>().closed = false;
+            p2Path2[i].GetComponent<rPaths>().closed = false;
             p2PaBla.Add(p2Path1[i]);
             p2PaWhi.Add(p2Path2[i]);
         }
@@ -325,10 +325,10 @@ public class GameManager : MonoBehaviour
             float pathNum2 = p2PaWhi.Count;
             float close2 = Random.Range(0f,pathNum2);
 
-            p2PaBla[(int) close].GetComponent<rPathsBlack>().closed = true;
+            p2PaBla[(int) close].GetComponent<rPaths>().closed = true;
             p2PaBla.Remove(p2PaBla[(int) close]);
 
-            p2PaWhi[(int) close2].GetComponent<rPathsWhite>().closed = true;
+            p2PaWhi[(int) close2].GetComponent<rPaths>().closed = true;
             p2PaWhi.Remove(p2PaWhi[(int) close2]);
         }
 

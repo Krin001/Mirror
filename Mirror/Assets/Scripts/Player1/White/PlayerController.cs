@@ -17,7 +17,12 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove,freeze;
 
-    //public bool up, up2, down, down2, left, left2, right, right2;
+    public GameObject[] permPath = new GameObject[33];
+
+    public bool up, up1, down, down1, left, left1, right, right1;
+
+    //Raycasts
+    public float castDist;
 
    
 
@@ -32,6 +37,11 @@ public class PlayerController : MonoBehaviour
         speed = 20f;
 
         Player2Controller = GameObject.Find("Character3").GetComponent<Player2Controller>();
+
+        for(int i = 0; i < 33; i++)
+        {
+            permPath[i] = GameObject.Find("permanentPath (" +(i) +")");
+        }
 
        
 
@@ -51,50 +61,50 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.pauseTime1 = false;
 
-                /*if(up&&up2)
-                {*/
+                if(up&&up1)
+                {
                     if(Input.GetKey(KeyCode.UpArrow))
                     {
-                        
+                       
                         rb.velocity = new Vector2(0, speed);
                         rb2.velocity = new Vector2(0, -speed);
-                        canMove = false;
+                        
                     }
-                /*}
+                }
                 
-                if(left&&left2)
-                {*/
+                if(left&&left1)
+                {
                     if(Input.GetKey(KeyCode.LeftArrow))
                     {
                         
                         rb.velocity = new Vector2(-speed, 0);
                         rb2.velocity = new Vector2(speed, 0);
-                        canMove = false;
+                        
                     }
-                /*}
+                }
 
-                if(down&&down2)
-                {*/
+                if(down&&down1)
+                {
                     if(Input.GetKey(KeyCode.DownArrow))
                     {
                         
                         rb.velocity = new Vector2(0, -speed);
                         rb2.velocity = new Vector2(0, speed);
-                        canMove = false;
+                        
                         
                     }
-                /*}
+                }
 
-                if(right&&right2)
-                {*/
+                if(right&&right1)
+                {
                     if(Input.GetKey(KeyCode.RightArrow))
                     {
                         
                         rb.velocity = new Vector2(speed, 0);
                         rb2.velocity = new Vector2(-speed, 0);
-                        canMove = false;
+                        
                     }
-                //}
+                }
             }
             else
             {
@@ -102,8 +112,134 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //raycasts
+
+        Vector2 center = gameObject.transform.position;
+        RaycastHit2D rayright = Physics2D.Raycast(center, Vector2.right, castDist);
+        RaycastHit2D rayleft = Physics2D.Raycast(center, -Vector2.right, castDist);
+        RaycastHit2D rayup = Physics2D.Raycast(center, Vector2.up, castDist);
+        RaycastHit2D raydown = Physics2D.Raycast(center, -Vector2.up, castDist);
+
+        
+
+        if(rayright.collider != null)
+        {
             
+
+            if(rayright.transform.name != "Wall")
+            {
+                if(rayright.transform.GetComponent<rPaths>().closed)
+                {
+                    right1 = false;
+                }
+                else
+                {
+                    right1 = true;
+                }
+            }
+            else
+            {
+                right1 = false;
+            }
             
+        }
+        else
+        {
+            right1 = true;
+        }
+
+
+        if(rayleft.collider != null)
+        {
+            Debug.Log(rayleft.transform.name);
+
+            if(rayleft.transform.name != "Wall")
+            {
+                if(rayleft.transform.GetComponent<rPaths>().closed)
+                {
+                    left1 = false;
+                }
+                else
+                {
+                    left1 = true;
+                }
+            }
+            else
+            {
+                left1 = false;
+            }
+            
+        }
+        else
+        {
+            left1 = true;
+        }
+
+
+        if(rayup.collider != null)
+        {
+            Debug.Log(rayup.transform.name);
+            if(rayup.transform.name != "Wall")
+            {
+                if(rayup.transform.GetComponent<rPaths>().closed)
+                {
+                    up1 = false;
+                }
+                else
+                {
+                    up1 = true;
+                }
+            }
+            else
+            {
+                up1 = false;
+            }
+            
+        }
+        else
+        {
+            up1 = true;
+        }
+
+
+        if(raydown.collider != null)
+        {
+            Debug.Log(raydown.transform.name);
+            if(raydown.transform.name != "Wall")
+            {
+                if(raydown.transform.GetComponent<rPaths>().closed)
+                {
+                    down1 = false;
+                }
+                else
+                {
+                    down1 = true;
+                }
+            }
+            else
+            {
+                down1 = false;
+            }
+            
+        }
+        else
+        {
+            down1 = true;
+        }
+
+        
+
+        Debug.DrawRay(center, Vector2.right * rayright.distance, Color.red);
+
+        Debug.DrawRay(center, -Vector2.right * rayleft.distance, Color.red);
+
+        Debug.DrawRay(center, Vector2.up * rayup.distance, Color.red);
+
+        Debug.DrawRay(center, -Vector2.up * raydown.distance, Color.red);
+
+        
+
+
     }
 
 
@@ -114,9 +250,6 @@ public class PlayerController : MonoBehaviour
         {
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
-                
-                
-                
                 canMove = true;
             
             
@@ -124,7 +257,7 @@ public class PlayerController : MonoBehaviour
 
         if(col.tag == "Coin")
         {
-            GameManager.location1 = Random.Range(0,19);
+            GameManager.location1 = Random.Range(0,65);
             GameManager.coinCount1 ++;
 
             GameManager.coinLo1 = new Vector3(GameManager.coinP1[GameManager.location1].transform.position.x, GameManager.coinP1[GameManager.location1].transform.position.y, GameManager.coinP1[GameManager.location1].transform.position.z);
@@ -157,14 +290,15 @@ public class PlayerController : MonoBehaviour
     {
         if(col.tag == "Fork")
         {
-                
-                //rb2.velocity = new Vector2(0, 0);
-                
-                
-                canMove = true;
-            
+            canMove = true;
             
         }
+    }
+
+    public void OnTriggerExit2D(Collider2D col)
+    {
+        canMove = false;
+
     }
 
     public IEnumerator clock()

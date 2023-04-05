@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1133651342871483218}
   - component: {fileID: 733478214025981406}
   - component: {fileID: 45980364243922623}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: White Clock
   m_TagString: Clock
   m_Icon: {fileID: 0}

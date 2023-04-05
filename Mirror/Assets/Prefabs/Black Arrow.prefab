@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1333474299404431656}
   - component: {fileID: 909069852583753745}
   - component: {fileID: 859319283914981279}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Black Arrow
   m_TagString: Arrows
   m_Icon: {fileID: 0}
