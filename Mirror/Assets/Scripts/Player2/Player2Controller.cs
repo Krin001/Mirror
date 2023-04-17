@@ -51,6 +51,14 @@ public class Player2Controller : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        {
+            GameManager.ranPaths2();
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -259,9 +267,13 @@ public class Player2Controller : MonoBehaviour
     {
         if(col.tag == "Fork")
         {
-                canMove = true;
+                
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
+                canMove = true;
+                
+
+                GameManager.ranPaths2();
             
         }
 
@@ -292,7 +304,7 @@ public class Player2Controller : MonoBehaviour
         
     }
 
-     public void OnTriggerStay2D(Collider2D col)
+    /* public void OnTriggerStay2D(Collider2D col)
     {
         if(col.tag == "Fork")
         {
@@ -300,7 +312,7 @@ public class Player2Controller : MonoBehaviour
             canMove = true;
             
         }
-    }
+    }*/
 
     public void OnTriggerExit2D(Collider2D col)
     {

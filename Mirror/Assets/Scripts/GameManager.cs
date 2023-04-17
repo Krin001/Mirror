@@ -131,7 +131,7 @@ public class GameManager : MonoBehaviour
 
         
 
-        if(pauseTime1 == false)
+        /*if(pauseTime1 == false)
         {
             pathTime1 += Time.deltaTime;
         }
@@ -153,7 +153,7 @@ public class GameManager : MonoBehaviour
         {
             pathTime2 = 0;
             ranPaths2();
-        }
+        }*/
 
 
         powerTimer += Time.deltaTime;

@@ -49,6 +49,14 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    void Update()
+    {
+        if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        {
+            GameManager.ranPaths1();
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -68,6 +76,7 @@ public class PlayerController : MonoBehaviour
                        
                         rb.velocity = new Vector2(0, speed);
                         rb2.velocity = new Vector2(0, -speed);
+                        canMove = false;
                         
                     }
                 }
@@ -79,6 +88,7 @@ public class PlayerController : MonoBehaviour
                         
                         rb.velocity = new Vector2(-speed, 0);
                         rb2.velocity = new Vector2(speed, 0);
+                        canMove = false;
                         
                     }
                 }
@@ -90,6 +100,7 @@ public class PlayerController : MonoBehaviour
                         
                         rb.velocity = new Vector2(0, -speed);
                         rb2.velocity = new Vector2(0, speed);
+                        canMove = false;
                         
                         
                     }
@@ -102,6 +113,7 @@ public class PlayerController : MonoBehaviour
                         
                         rb.velocity = new Vector2(speed, 0);
                         rb2.velocity = new Vector2(-speed, 0);
+                        canMove = false;
                         
                     }
                 }
@@ -251,6 +263,8 @@ public class PlayerController : MonoBehaviour
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
                 canMove = true;
+
+                GameManager.ranPaths1();
             
             
         }
@@ -286,18 +300,18 @@ public class PlayerController : MonoBehaviour
         
     }
 
-     public void OnTriggerStay2D(Collider2D col)
+    /* public void OnTriggerStay2D(Collider2D col)
     {
         if(col.tag == "Fork")
         {
             canMove = true;
             
         }
-    }
+    }*/
 
     public void OnTriggerExit2D(Collider2D col)
     {
-        canMove = false;
+        
 
     }
 
