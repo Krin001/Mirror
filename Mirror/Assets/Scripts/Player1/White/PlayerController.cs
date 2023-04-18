@@ -51,10 +51,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        /*if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
         {
             GameManager.ranPaths1();
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -264,7 +264,7 @@ public class PlayerController : MonoBehaviour
                 rb.velocity = new Vector2(0, 0);
                 canMove = true;
 
-                GameManager.ranPaths1();
+                //GameManager.ranPaths1();
             
             
         }

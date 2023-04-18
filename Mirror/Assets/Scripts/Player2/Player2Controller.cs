@@ -53,10 +53,10 @@ public class Player2Controller : MonoBehaviour
 
     void Update()
     {
-        if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        /*if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
         {
             GameManager.ranPaths2();
-        }
+        }*/
     }
 
     // Update is called once per frame
@@ -273,7 +273,7 @@ public class Player2Controller : MonoBehaviour
                 canMove = true;
                 
 
-                GameManager.ranPaths2();
+                //GameManager.ranPaths2();
             
         }
 
@@ -314,12 +314,7 @@ public class Player2Controller : MonoBehaviour
         }
     }*/
 
-    public void OnTriggerExit2D(Collider2D col)
-    {
-        canMove = false;
-
-    }
-
+    
     public IEnumerator clock()
     {
         freeze = true;
