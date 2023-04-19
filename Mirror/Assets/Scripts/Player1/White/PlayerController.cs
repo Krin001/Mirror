@@ -21,6 +21,10 @@ public class PlayerController : MonoBehaviour
 
     public bool up, up1, down, down1, left, left1, right, right1, reverse;
 
+
+    public bool inputDelay;
+
+
     //Raycasts
     public float castDist;
 
@@ -51,7 +55,10 @@ public class PlayerController : MonoBehaviour
             {
                 canMove = false;
             }
+            
+            
         }
+        
     }
 
     // Update is called once per frame
@@ -64,102 +71,114 @@ public class PlayerController : MonoBehaviour
         {
             if(canMove)
             {
-                GameManager.pauseTime1 = false;
-
-                if(!reverse)
+                if(!inputDelay)
                 {
-                    if(up&&up1)
-                    {
-                        if(Input.GetKey("up"))
-                        {
-                            
-                            rb.velocity = new Vector2(0, speed);
-                            rb2.velocity = new Vector2(0, -speed);
-                            
-                        }
-                    }
-                    
-                    if(left&&left1)
-                    {
-                        if(Input.GetKey("left"))
-                        {
-                            
-                            rb.velocity = new Vector2(-speed, 0);
-                            rb2.velocity = new Vector2(speed, 0);
-                            
-                        }
-                    }
+                    GameManager.pauseTime1 = false;
 
-                    if(down&&down1)
+                    if(!reverse)
                     {
-                        if(Input.GetKey("down"))
+                        if(up&&up1)
                         {
-                            
-                            rb.velocity = new Vector2(0, -speed);
-                            rb2.velocity = new Vector2(0, speed);
-                            
-                            
+                            if(Input.GetKey("up"))
+                            {
+                                
+                                rb.velocity = new Vector2(0, speed);
+                                rb2.velocity = new Vector2(0, -speed);
+                                canMove = false;
+                                
+                            }
+                        }
+                        
+                        if(left&&left1)
+                        {
+                            if(Input.GetKey("left"))
+                            {
+                                
+                                rb.velocity = new Vector2(-speed, 0);
+                                rb2.velocity = new Vector2(speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+
+                        if(down&&down1)
+                        {
+                            if(Input.GetKey("down"))
+                            {
+                                
+                                rb.velocity = new Vector2(0, -speed);
+                                rb2.velocity = new Vector2(0, speed);
+                                canMove = false;
+                                
+                                
+                            }
+                        }
+
+                        if(right&&right1)
+                        {
+                            if(Input.GetKey("right"))
+                            {
+                                
+                                rb.velocity = new Vector2(speed, 0);
+                                rb2.velocity = new Vector2(-speed, 0);
+                                canMove = false;
+                                
+                            }
                         }
                     }
-
-                    if(right&&right1)
+                    else
                     {
-                        if(Input.GetKey("right"))
+                        if(up&&up1)
                         {
-                            
-                            rb.velocity = new Vector2(speed, 0);
-                            rb2.velocity = new Vector2(-speed, 0);
-                            
+                            if(Input.GetKey("down"))
+                            {
+                                
+                                rb.velocity = new Vector2(0, speed);
+                                rb2.velocity = new Vector2(0, -speed);
+                                canMove = false;
+                                
+                            }
+                        }
+                        
+                        if(left&&left1)
+                        {
+                            if(Input.GetKey("right"))
+                            {
+                                
+                                rb.velocity = new Vector2(-speed, 0);
+                                rb2.velocity = new Vector2(speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+
+                        if(down&&down1)
+                        {
+                            if(Input.GetKey("up"))
+                            {
+                                
+                                rb.velocity = new Vector2(0, -speed);
+                                rb2.velocity = new Vector2(0, speed);
+                                canMove = false;
+                                
+                                
+                            }
+                        }
+
+                        if(right&&right1)
+                        {
+                            if(Input.GetKey("left"))
+                            {
+                                
+                                rb.velocity = new Vector2(speed, 0);
+                                rb2.velocity = new Vector2(-speed, 0);
+                                canMove = false;
+                                
+                            }
                         }
                     }
                 }
-                else
-                {
-                    if(up&&up1)
-                    {
-                        if(Input.GetKey("down"))
-                        {
-                            
-                            rb.velocity = new Vector2(0, speed);
-                            rb2.velocity = new Vector2(0, -speed);
-                            
-                        }
-                    }
-                    
-                    if(left&&left1)
-                    {
-                        if(Input.GetKey("right"))
-                        {
-                            
-                            rb.velocity = new Vector2(-speed, 0);
-                            rb2.velocity = new Vector2(speed, 0);
-                            
-                        }
-                    }
-
-                    if(down&&down1)
-                    {
-                        if(Input.GetKey("up"))
-                        {
-                            
-                            rb.velocity = new Vector2(0, -speed);
-                            rb2.velocity = new Vector2(0, speed);
-                            
-                            
-                        }
-                    }
-
-                    if(right&&right1)
-                    {
-                        if(Input.GetKey("left"))
-                        {
-                            
-                            rb.velocity = new Vector2(speed, 0);
-                            rb2.velocity = new Vector2(-speed, 0);
-                            
-                        }
-                    }
-                }
+                
             }
             else
             {
@@ -306,6 +325,7 @@ public class PlayerController : MonoBehaviour
                 permPath = col.gameObject;
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
+                StartCoroutine(delayInput());
                 
             
             
@@ -342,14 +362,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public void OnTriggerStay2D(Collider2D col)
-    {
-        if(col.tag == "Fork")
-        {
-            canMove = true;
-            
-        }
-    }
+    
 
     public void OnTriggerExit2D(Collider2D col)
     {
@@ -377,5 +390,15 @@ public class PlayerController : MonoBehaviour
         reverse = false;
         
         StopCoroutine(arrows());
+    }
+
+    public IEnumerator delayInput()
+    {
+        
+        inputDelay = true;
+        yield return new WaitForSeconds(.05f);
+        inputDelay = false;
+        
+        StopCoroutine(delayInput());
     }
 }

@@ -20,6 +20,8 @@ public class Player2Controller : MonoBehaviour
 
     public bool up, down, left, right, up1, down1, left1, right1, reverse;
 
+    public bool inputDelay;
+
 
     //Raycasts
     public float castDist;
@@ -51,7 +53,10 @@ public class Player2Controller : MonoBehaviour
             {
                 canMove = false;
             }
+            
+            
         }
+        
         
     }
 
@@ -65,103 +70,114 @@ public class Player2Controller : MonoBehaviour
         {
             if(canMove)
             {
+                if(!inputDelay)
+                {
+                    GameManager.pauseTime2 = false;
+
+                    if(!reverse)
+                    {
+                        if(up&&up1)
+                        {
+                            if(Input.GetKey(KeyCode.W))
+                            {
+                                
+                                rb.velocity = new Vector2(0, speed);
+                                rb2.velocity = new Vector2(0, -speed);
+                                canMove = false;
+                                
+                            }
+                        }
+                        
+                        if(left&&left1)
+                        {
+                            if(Input.GetKey(KeyCode.A))
+                            {
+                                
+                                rb.velocity = new Vector2(-speed, 0);
+                                rb2.velocity = new Vector2(speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+
+                        if(down&&down1)
+                        {
+                            if(Input.GetKey(KeyCode.S))
+                            {
+                                
+                                rb.velocity = new Vector2(0, -speed);
+                                rb2.velocity = new Vector2(0, speed);
+                                canMove = false;
+                                
+                                
+                            }
+                        }
+
+                        if(right&&right1)
+                        {
+                            if(Input.GetKey(KeyCode.D))
+                            {
+                                
+                                rb.velocity = new Vector2(speed, 0);
+                                rb2.velocity = new Vector2(-speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if(up&&up1)
+                        {
+                            if(Input.GetKey(KeyCode.S))
+                            {
+                                
+                                rb.velocity = new Vector2(0, speed);
+                                rb2.velocity = new Vector2(0, -speed);
+                                canMove = false;
+                                
+                            }
+                        }
+                        
+                        if(left&&left1)
+                        {
+                            if(Input.GetKey(KeyCode.D))
+                            {
+                                
+                                rb.velocity = new Vector2(-speed, 0);
+                                rb2.velocity = new Vector2(speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+
+                        if(down&&down1)
+                        {
+                            if(Input.GetKey(KeyCode.W))
+                            {
+                                
+                                rb.velocity = new Vector2(0, -speed);
+                                rb2.velocity = new Vector2(0, speed);
+                                canMove = false;
+                                
+                                
+                            }
+                        }
+
+                        if(right&&right1)
+                        {
+                            if(Input.GetKey(KeyCode.A))
+                            {
+                                
+                                rb.velocity = new Vector2(speed, 0);
+                                rb2.velocity = new Vector2(-speed, 0);
+                                canMove = false;
+                                
+                            }
+                        }
+                    }
+                }
                 
-                GameManager.pauseTime2 = false;
-
-                if(!reverse)
-                {
-                    if(up&&up1)
-                    {
-                        if(Input.GetKey(KeyCode.W))
-                        {
-                            
-                            rb.velocity = new Vector2(0, speed);
-                            rb2.velocity = new Vector2(0, -speed);
-                            
-                        }
-                    }
-                    
-                    if(left&&left1)
-                    {
-                        if(Input.GetKey(KeyCode.A))
-                        {
-                            
-                            rb.velocity = new Vector2(-speed, 0);
-                            rb2.velocity = new Vector2(speed, 0);
-                            
-                        }
-                    }
-
-                    if(down&&down1)
-                    {
-                        if(Input.GetKey(KeyCode.S))
-                        {
-                            
-                            rb.velocity = new Vector2(0, -speed);
-                            rb2.velocity = new Vector2(0, speed);
-                            
-                            
-                        }
-                    }
-
-                    if(right&&right1)
-                    {
-                        if(Input.GetKey(KeyCode.D))
-                        {
-                            
-                            rb.velocity = new Vector2(speed, 0);
-                            rb2.velocity = new Vector2(-speed, 0);
-                            
-                        }
-                    }
-                }
-                else
-                {
-                    if(up&&up1)
-                    {
-                        if(Input.GetKey(KeyCode.S))
-                        {
-                            
-                            rb.velocity = new Vector2(0, speed);
-                            rb2.velocity = new Vector2(0, -speed);
-                            
-                        }
-                    }
-                    
-                    if(left&&left1)
-                    {
-                        if(Input.GetKey(KeyCode.D))
-                        {
-                            
-                            rb.velocity = new Vector2(-speed, 0);
-                            rb2.velocity = new Vector2(speed, 0);
-                            
-                        }
-                    }
-
-                    if(down&&down1)
-                    {
-                        if(Input.GetKey(KeyCode.W))
-                        {
-                            
-                            rb.velocity = new Vector2(0, -speed);
-                            rb2.velocity = new Vector2(0, speed);
-                            
-                            
-                        }
-                    }
-
-                    if(right&&right1)
-                    {
-                        if(Input.GetKey(KeyCode.A))
-                        {
-                            
-                            rb.velocity = new Vector2(speed, 0);
-                            rb2.velocity = new Vector2(-speed, 0);
-                            
-                        }
-                    }
-                }
             }
             else
             {
@@ -316,6 +332,7 @@ public class Player2Controller : MonoBehaviour
                 permPath = col.gameObject;
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
+                StartCoroutine(delayInput());
                 
                 
 
@@ -378,6 +395,16 @@ public class Player2Controller : MonoBehaviour
         reverse = false;
         
         StopCoroutine(arrows());
+    }
+
+    public IEnumerator delayInput()
+    {
+        
+        inputDelay = true;
+        yield return new WaitForSeconds(.05f);
+        inputDelay = false;
+        
+        StopCoroutine(delayInput());
     }
 
 }

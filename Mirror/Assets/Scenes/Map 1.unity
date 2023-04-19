@@ -5553,6 +5553,7 @@ MonoBehaviour:
   left1: 0
   right1: 0
   reverse: 0
+  inputDelay: 0
   castDist: 3
 --- !u!50 &203251730
 Rigidbody2D:
@@ -47930,6 +47931,7 @@ MonoBehaviour:
   right: 0
   right1: 0
   reverse: 0
+  inputDelay: 0
   castDist: 3
 --- !u!1 &1566595179
 GameObject:
