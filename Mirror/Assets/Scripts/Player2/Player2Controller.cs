@@ -16,9 +16,9 @@ public class Player2Controller : MonoBehaviour
 
     public PlayerController  PlayerController;
 
-    public GameObject[] permPath = new GameObject[33];
+    public GameObject permPath;
 
-    public bool up, down, left, right, up1, down1, left1, right1;
+    public bool up, down, left, right, up1, down1, left1, right1, reverse;
 
 
     //Raycasts
@@ -37,26 +37,22 @@ public class Player2Controller : MonoBehaviour
         speed = 20f;
 
         PlayerController = GameObject.Find("Character1").GetComponent<PlayerController>();
-
-        for(int i = 33; i < 66; i++)
-        {
-            permPath[i-33] = GameObject.Find("PermanentPath2 (" +(i) +")");
-        }
-
-
-
-       
-
-
-        
     }
 
     void Update()
     {
-        /*if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        if(permPath!=null)
         {
-            GameManager.ranPaths2();
-        }*/
+            if(transform.position == permPath.transform.position)
+            {
+                canMove = true;
+            }
+            else
+            {
+                canMove = false;
+            }
+        }
+        
     }
 
     // Update is called once per frame
@@ -72,48 +68,98 @@ public class Player2Controller : MonoBehaviour
                 
                 GameManager.pauseTime2 = false;
 
-                if(up&&up1)
+                if(!reverse)
                 {
-                    if(Input.GetKey(KeyCode.W))
+                    if(up&&up1)
                     {
-                        
-                        rb.velocity = new Vector2(0, speed);
-                        rb2.velocity = new Vector2(0, -speed);
-                        
+                        if(Input.GetKey(KeyCode.W))
+                        {
+                            
+                            rb.velocity = new Vector2(0, speed);
+                            rb2.velocity = new Vector2(0, -speed);
+                            
+                        }
                     }
-                }
-                
-                if(left&&left1)
-                {
-                    if(Input.GetKey(KeyCode.A))
+                    
+                    if(left&&left1)
                     {
-                        
-                        rb.velocity = new Vector2(-speed, 0);
-                        rb2.velocity = new Vector2(speed, 0);
-                        
+                        if(Input.GetKey(KeyCode.A))
+                        {
+                            
+                            rb.velocity = new Vector2(-speed, 0);
+                            rb2.velocity = new Vector2(speed, 0);
+                            
+                        }
                     }
-                }
 
-                if(down&&down1)
-                {
-                    if(Input.GetKey(KeyCode.S))
+                    if(down&&down1)
                     {
-                        
-                        rb.velocity = new Vector2(0, -speed);
-                        rb2.velocity = new Vector2(0, speed);
-                        
-                        
+                        if(Input.GetKey(KeyCode.S))
+                        {
+                            
+                            rb.velocity = new Vector2(0, -speed);
+                            rb2.velocity = new Vector2(0, speed);
+                            
+                            
+                        }
+                    }
+
+                    if(right&&right1)
+                    {
+                        if(Input.GetKey(KeyCode.D))
+                        {
+                            
+                            rb.velocity = new Vector2(speed, 0);
+                            rb2.velocity = new Vector2(-speed, 0);
+                            
+                        }
                     }
                 }
-
-                if(right&&right1)
+                else
                 {
-                    if(Input.GetKey(KeyCode.D))
+                    if(up&&up1)
                     {
-                        
-                        rb.velocity = new Vector2(speed, 0);
-                        rb2.velocity = new Vector2(-speed, 0);
-                        
+                        if(Input.GetKey(KeyCode.S))
+                        {
+                            
+                            rb.velocity = new Vector2(0, speed);
+                            rb2.velocity = new Vector2(0, -speed);
+                            
+                        }
+                    }
+                    
+                    if(left&&left1)
+                    {
+                        if(Input.GetKey(KeyCode.D))
+                        {
+                            
+                            rb.velocity = new Vector2(-speed, 0);
+                            rb2.velocity = new Vector2(speed, 0);
+                            
+                        }
+                    }
+
+                    if(down&&down1)
+                    {
+                        if(Input.GetKey(KeyCode.W))
+                        {
+                            
+                            rb.velocity = new Vector2(0, -speed);
+                            rb2.velocity = new Vector2(0, speed);
+                            
+                            
+                        }
+                    }
+
+                    if(right&&right1)
+                    {
+                        if(Input.GetKey(KeyCode.A))
+                        {
+                            
+                            rb.velocity = new Vector2(speed, 0);
+                            rb2.velocity = new Vector2(-speed, 0);
+                            
+                        }
                     }
                 }
             }
@@ -163,7 +209,7 @@ public class Player2Controller : MonoBehaviour
 
         if(rayleft.collider != null)
         {
-            Debug.Log(rayleft.transform.name);
+            
 
             if(rayleft.transform.name != "Wall")
             {
@@ -190,7 +236,7 @@ public class Player2Controller : MonoBehaviour
 
         if(rayup.collider != null)
         {
-            Debug.Log(rayup.transform.name);
+            
             if(rayup.transform.name != "Wall")
             {
                 if(rayup.transform.GetComponent<rPaths>().closed)
@@ -216,7 +262,7 @@ public class Player2Controller : MonoBehaviour
 
         if(raydown.collider != null)
         {
-            Debug.Log(raydown.transform.name);
+            
             if(raydown.transform.name != "Wall")
             {
                 if(raydown.transform.GetComponent<rPaths>().closed)
@@ -267,10 +313,10 @@ public class Player2Controller : MonoBehaviour
     {
         if(col.tag == "Fork")
         {
-                
+                permPath = col.gameObject;
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
-                canMove = true;
+                
                 
 
                 //GameManager.ranPaths2();
@@ -304,15 +350,16 @@ public class Player2Controller : MonoBehaviour
         
     }
 
-    /* public void OnTriggerStay2D(Collider2D col)
+    public void OnTriggerExit2D(Collider2D col)
     {
         if(col.tag == "Fork")
-        {
-                
-            canMove = true;
-            
+        { 
+            permPath = null;
         }
-    }*/
+        
+
+    }
+
 
     
     public IEnumerator clock()
@@ -325,9 +372,11 @@ public class Player2Controller : MonoBehaviour
 
     public IEnumerator arrows()
     {
-        speed*=-1;
-        yield return new WaitForSeconds(5f);
-        speed*=-1;
+        reverse = true;
+        
+        yield return new WaitForSeconds(10f);
+        reverse = false;
+        
         StopCoroutine(arrows());
     }
 

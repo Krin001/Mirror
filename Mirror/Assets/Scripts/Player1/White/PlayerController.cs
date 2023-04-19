@@ -17,9 +17,9 @@ public class PlayerController : MonoBehaviour
 
     public bool canMove,freeze;
 
-    public GameObject[] permPath = new GameObject[33];
+    public GameObject permPath;
 
-    public bool up, up1, down, down1, left, left1, right, right1;
+    public bool up, up1, down, down1, left, left1, right, right1, reverse;
 
     //Raycasts
     public float castDist;
@@ -37,24 +37,21 @@ public class PlayerController : MonoBehaviour
         speed = 20f;
 
         Player2Controller = GameObject.Find("Character3").GetComponent<Player2Controller>();
-
-        for(int i = 0; i < 33; i++)
-        {
-            permPath[i] = GameObject.Find("permanentPath (" +(i) +")");
-        }
-
-       
-
-
-        
     }
 
     void Update()
     {
-        /*if((!up1&&!left1&&!down1&&!right1)||(!up&&!left&&!down&&!right))
+        if(permPath!=null)
         {
-            GameManager.ranPaths1();
-        }*/
+            if(transform.position == permPath.transform.position)
+            {
+                canMove = true;
+            }
+            else
+            {
+                canMove = false;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -69,52 +66,98 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.pauseTime1 = false;
 
-                if(up&&up1)
+                if(!reverse)
                 {
-                    if(Input.GetKey(KeyCode.UpArrow))
+                    if(up&&up1)
                     {
-                       
-                        rb.velocity = new Vector2(0, speed);
-                        rb2.velocity = new Vector2(0, -speed);
-                        canMove = false;
-                        
+                        if(Input.GetKey("up"))
+                        {
+                            
+                            rb.velocity = new Vector2(0, speed);
+                            rb2.velocity = new Vector2(0, -speed);
+                            
+                        }
                     }
-                }
-                
-                if(left&&left1)
-                {
-                    if(Input.GetKey(KeyCode.LeftArrow))
+                    
+                    if(left&&left1)
                     {
-                        
-                        rb.velocity = new Vector2(-speed, 0);
-                        rb2.velocity = new Vector2(speed, 0);
-                        canMove = false;
-                        
+                        if(Input.GetKey("left"))
+                        {
+                            
+                            rb.velocity = new Vector2(-speed, 0);
+                            rb2.velocity = new Vector2(speed, 0);
+                            
+                        }
                     }
-                }
 
-                if(down&&down1)
-                {
-                    if(Input.GetKey(KeyCode.DownArrow))
+                    if(down&&down1)
                     {
-                        
-                        rb.velocity = new Vector2(0, -speed);
-                        rb2.velocity = new Vector2(0, speed);
-                        canMove = false;
-                        
-                        
+                        if(Input.GetKey("down"))
+                        {
+                            
+                            rb.velocity = new Vector2(0, -speed);
+                            rb2.velocity = new Vector2(0, speed);
+                            
+                            
+                        }
+                    }
+
+                    if(right&&right1)
+                    {
+                        if(Input.GetKey("right"))
+                        {
+                            
+                            rb.velocity = new Vector2(speed, 0);
+                            rb2.velocity = new Vector2(-speed, 0);
+                            
+                        }
                     }
                 }
-
-                if(right&&right1)
+                else
                 {
-                    if(Input.GetKey(KeyCode.RightArrow))
+                    if(up&&up1)
                     {
-                        
-                        rb.velocity = new Vector2(speed, 0);
-                        rb2.velocity = new Vector2(-speed, 0);
-                        canMove = false;
-                        
+                        if(Input.GetKey("down"))
+                        {
+                            
+                            rb.velocity = new Vector2(0, speed);
+                            rb2.velocity = new Vector2(0, -speed);
+                            
+                        }
+                    }
+                    
+                    if(left&&left1)
+                    {
+                        if(Input.GetKey("right"))
+                        {
+                            
+                            rb.velocity = new Vector2(-speed, 0);
+                            rb2.velocity = new Vector2(speed, 0);
+                            
+                        }
+                    }
+
+                    if(down&&down1)
+                    {
+                        if(Input.GetKey("up"))
+                        {
+                            
+                            rb.velocity = new Vector2(0, -speed);
+                            rb2.velocity = new Vector2(0, speed);
+                            
+                            
+                        }
+                    }
+
+                    if(right&&right1)
+                    {
+                        if(Input.GetKey("left"))
+                        {
+                            
+                            rb.velocity = new Vector2(speed, 0);
+                            rb2.velocity = new Vector2(-speed, 0);
+                            
+                        }
                     }
                 }
             }
@@ -163,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
         if(rayleft.collider != null)
         {
-            Debug.Log(rayleft.transform.name);
+            
 
             if(rayleft.transform.name != "Wall")
             {
@@ -190,7 +233,7 @@ public class PlayerController : MonoBehaviour
 
         if(rayup.collider != null)
         {
-            Debug.Log(rayup.transform.name);
+            
             if(rayup.transform.name != "Wall")
             {
                 if(rayup.transform.GetComponent<rPaths>().closed)
@@ -216,7 +259,7 @@ public class PlayerController : MonoBehaviour
 
         if(raydown.collider != null)
         {
-            Debug.Log(raydown.transform.name);
+            
             if(raydown.transform.name != "Wall")
             {
                 if(raydown.transform.GetComponent<rPaths>().closed)
@@ -260,11 +303,10 @@ public class PlayerController : MonoBehaviour
     {
         if(col.tag == "Fork")
         {
+                permPath = col.gameObject;
                 transform.position = new Vector2(col.gameObject.transform.position.x, col.gameObject.transform.position.y);
                 rb.velocity = new Vector2(0, 0);
-                canMove = true;
-
-                //GameManager.ranPaths1();
+                
             
             
         }
@@ -300,17 +342,21 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    /* public void OnTriggerStay2D(Collider2D col)
+    public void OnTriggerStay2D(Collider2D col)
     {
         if(col.tag == "Fork")
         {
             canMove = true;
             
         }
-    }*/
+    }
 
     public void OnTriggerExit2D(Collider2D col)
     {
+        if(col.tag == "Fork")
+        { 
+            permPath = null;
+        }
         
 
     }
@@ -325,9 +371,11 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator arrows()
     {
-        speed*=-1;
+        reverse = true;
+        
         yield return new WaitForSeconds(10f);
-        speed*=-1;
+        reverse = false;
+        
         StopCoroutine(arrows());
     }
 }

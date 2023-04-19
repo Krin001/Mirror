@@ -69,7 +69,7 @@ public class pControl : MonoBehaviour
 
         if(left.collider != null)
         {
-            Debug.Log(left.transform.name);
+            
 
             if(left.transform.name != "Wall")
             {
@@ -102,7 +102,7 @@ public class pControl : MonoBehaviour
 
         if(up.collider != null)
         {
-            Debug.Log(up.transform.name);
+            
             if(up.transform.name != "Wall")
             {
                 if(up.transform.GetComponent<rPaths>().closed)
@@ -134,7 +134,7 @@ public class pControl : MonoBehaviour
 
         if(down.collider != null)
         {
-            Debug.Log(down.transform.name);
+            
             if(down.transform.name != "Wall")
             {
                 if(down.transform.GetComponent<rPaths>().closed)

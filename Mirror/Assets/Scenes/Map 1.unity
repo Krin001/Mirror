@@ -5543,40 +5543,7 @@ MonoBehaviour:
   canMove: 0
   freeze: 0
   PlayerController: {fileID: 0}
-  permPath:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  permPath: {fileID: 0}
   up: 0
   down: 0
   left: 0
@@ -5585,6 +5552,7 @@ MonoBehaviour:
   down1: 0
   left1: 0
   right1: 0
+  reverse: 0
   castDist: 3
 --- !u!50 &203251730
 Rigidbody2D:
@@ -47952,40 +47920,7 @@ MonoBehaviour:
   speed: 0
   canMove: 0
   freeze: 0
-  permPath:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  permPath: {fileID: 0}
   up: 0
   up1: 0
   down: 0
@@ -47994,6 +47929,7 @@ MonoBehaviour:
   left1: 0
   right: 0
   right1: 0
+  reverse: 0
   castDist: 3
 --- !u!1 &1566595179
 GameObject:
