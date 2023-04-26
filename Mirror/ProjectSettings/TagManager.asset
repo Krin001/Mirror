@@ -13,6 +13,7 @@ TagManager:
   - Test
   - Clock
   - Arrows
+  - badCoin
   layers:
   - Default
   - TransparentFX
