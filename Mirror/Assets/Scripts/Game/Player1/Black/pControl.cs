@@ -187,6 +187,7 @@ public class pControl : MonoBehaviour
 
         if(fork.tag == "Coin")
         {
+            GameManager.coi.Play();
             GameManager.location1 = Random.Range(0,65);
             GameManager.coinCount1 ++;
 
@@ -211,6 +212,7 @@ public class pControl : MonoBehaviour
 
         if(fork.tag == "badCoin")
         {
+            GameManager.coi.Play();
             GameManager.coinCount2--;
             Destroy(fork.gameObject);
             

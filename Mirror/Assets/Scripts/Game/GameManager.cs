@@ -49,9 +49,18 @@ public class GameManager : MonoBehaviour
     public string play2CC = "P2 Coins: = 0";
 
     //Starting timer
+    public GameObject startingTime;
     public float startTime = 5;
     public bool canStart;
     public TMP_Text startDelay;
+
+    public bool pause;
+    public GameObject controls;
+    public GameObject scCont;
+
+    //power ups
+    public GameObject rev,rev2,cl,cl2;
+     public AudioSource coi; 
     
     
     
@@ -60,6 +69,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startingTime.SetActive(true);
+        controls.SetActive(false);
         p1Paths();
         p2Paths();
 
@@ -88,6 +99,11 @@ public class GameManager : MonoBehaviour
         p1CC.text = play1CC;
         p2CC.text = play2CC;
 
+        rev.SetActive(false); 
+        rev2.SetActive(false); 
+        cl.SetActive(false);
+        cl2.SetActive(false);
+
 
 
 
@@ -96,99 +112,144 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!pause)
+        {
+            if(Input.GetKeyUp(KeyCode.Escape))
+            {
+                scCont.GetComponent<sceneChange>().titleGame();
+            }
+        }
+
+
+        if(Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            if(pause)
+            {
+                pause = false;
+            }
+            else
+            {
+                pause = true;
+            }
+        }
+
+        if(Input.GetKeyUp(KeyCode.RightShift))
+        {
+            if(pause)
+            {
+                pause = false;
+            }
+            else
+            {
+                pause = true;
+            }
+        }
+
+        if(pause)
+        {
+            controls.SetActive(true);
+        }
+        else
+        {
+            controls.SetActive(false);
+        }
 
         p1CC.text = "P1 Coins: = " + coinCount1;
 
         p2CC.text = "P2 Coins: = " + coinCount2;
 
-        if(canStart)
+        if(!pause)
         {
-            if(gameTime>=0)
+            if(canStart)
             {
-                gameTime -= Time.deltaTime;
-                int time = Mathf.RoundToInt(gameTime);
-                timer.text = "Time Left: " +time;
-
-            }
-            else
-            {
-                Player2Controller p2C = GameObject.Find("Character3").GetComponent<Player2Controller>();
-                PlayerController p1C = GameObject.Find("Character1").GetComponent<PlayerController>();
-                p2C.canMove = false;
-                
-                
-                p1C.canMove = false;
-
-                if(coinCount1>coinCount2)
+                if(gameTime>=0)
                 {
-                    timer.text = "P1 wins!";
-                }
-                else if(coinCount1<coinCount2)
-                {
-                    timer.text = "P2 wins!";
+                    gameTime -= Time.deltaTime;
+                    int time = Mathf.RoundToInt(gameTime);
+                    timer.text = "Time Left: " +time;
+
                 }
                 else
                 {
-                    timer.text = "Wow its a tie!";
+                    Player2Controller p2C = GameObject.Find("Character3").GetComponent<Player2Controller>();
+                    PlayerController p1C = GameObject.Find("Character1").GetComponent<PlayerController>();
+                    p2C.canMove = false;
+                    
+                    
+                    p1C.canMove = false;
+
+                    if(coinCount1>coinCount2)
+                    {
+                        timer.text = "P1 wins!";
+                    }
+                    else if(coinCount1<coinCount2)
+                    {
+                        timer.text = "P2 wins!";
+                    }
+                    else
+                    {
+                        timer.text = "Wow its a tie!";
+                    }
                 }
-            }
-            
+                
 
 
 
 
-            
+                
 
-            /*if(pauseTime1 == false)
-            {
+                /*if(pauseTime1 == false)
+                {
+                    
+                }
+
+                if(pauseTime2 == false)
+                {
+                    
+                }*/
+
+                pathTime1 += Time.deltaTime;
+                pathTime2 += Time.deltaTime;
+                
+
+                if(pathTime1 >= 5)
+                {
+                    pathTime1 = 0;
+                    ranPaths1();
+                }
+
+                
+                
+                
+
+                if(pathTime2 >= 5)
+                {
+                    pathTime2 = 0;
+                    ranPaths2();
+                }
+
+
+                powerTimer += Time.deltaTime;
+                
+                if(powerTimer >= 5)
+                {
+                    pow();
+                }
+                
                 
             }
-
-            if(pauseTime2 == false)
+            else
             {
-                
-            }*/
+                startTime-=Time.deltaTime;
+                int sT = Mathf.RoundToInt(startTime);
+                startDelay.text = sT.ToString();
 
-            pathTime1 += Time.deltaTime;
-            pathTime2 += Time.deltaTime;
-            
-
-            if(pathTime1 >= 5)
-            {
-                pathTime1 = 0;
-                ranPaths1();
-            }
-
-            
-            
-            
-
-            if(pathTime2 >= 5)
-            {
-                pathTime2 = 0;
-                ranPaths2();
-            }
-
-
-            powerTimer += Time.deltaTime;
-            
-            if(powerTimer >= 5)
-            {
-                pow();
-            }
-            
-            
-        }
-        else
-        {
-            startTime-=Time.deltaTime;
-            int sT = Mathf.RoundToInt(startTime);
-             startDelay.text = sT.ToString();
-
-            if(sT == 0)
-            {
-                canStart = true;
-                startDelay.enabled = false;
+                if(sT == 0)
+                {
+                    canStart = true;
+                    startDelay.enabled = false;
+                    startingTime.SetActive(false);
+                }
             }
         }
         

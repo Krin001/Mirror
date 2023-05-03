@@ -175,6 +175,7 @@ public class P1Cont2 : MonoBehaviour
 
         if(fork.tag == "Coin")
         {
+            tutorialController.coi.Play();
             tutorialController.location1 = Random.Range(0,17);
             
 

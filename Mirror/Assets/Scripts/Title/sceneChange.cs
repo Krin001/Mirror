@@ -19,21 +19,50 @@ public class sceneChange : MonoBehaviour
 
     public void playGame()
     {
-        SceneManager.LoadScene("Game");
+        StartCoroutine(StartDelay());
     }
 
      public void LearnGame()
     {
-        SceneManager.LoadScene("Tutorial");
+        StartCoroutine(TutorialDelay());
     }
 
      public void creditsGame()
     {
-        SceneManager.LoadScene("Credits");
+        StartCoroutine(CreditsDelay());
     }
 
     public void titleGame()
     {
+        StartCoroutine(TitleDelay());
+    }
+
+    public IEnumerator TitleDelay()
+    {
+        yield return new WaitForSeconds(.3f);
         SceneManager.LoadScene("Title");
+        StopCoroutine(TitleDelay());
+    }
+
+    public IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene("Game");
+        StopCoroutine(StartDelay());
+    }
+
+    public IEnumerator TutorialDelay()
+    {
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene("Tutorial");
+        
+        StopCoroutine(TutorialDelay());
+    }
+
+    public IEnumerator CreditsDelay()
+    {
+        yield return new WaitForSeconds(.3f);
+        SceneManager.LoadScene("Credits");
+        StopCoroutine(CreditsDelay());
     }
 }

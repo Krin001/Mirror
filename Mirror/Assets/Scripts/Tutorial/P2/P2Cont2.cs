@@ -174,6 +174,7 @@ public class P2Cont2 : MonoBehaviour
 
         if(fork.tag == "Coin")
         {
+            tutorialController.coi.Play();
             tutorialController.location2 = Random.Range(0,17);
             
 

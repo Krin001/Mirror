@@ -54,6 +54,13 @@ public class tutorialController : MonoBehaviour
 
     public GameObject scCont;
 
+    //Sounds 
+    public AudioSource power,coi;
+
+
+    //power ups
+    public GameObject rev,rev2,cl,cl2;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,12 +68,24 @@ public class tutorialController : MonoBehaviour
         p1Paths();
         p2Paths();
 
+        for(int i = 0; i < 18; i++)
+        {
+            coinP1[i] = GameObject.Find("PermanentPath (" +(i) +")");
+            coinP2[i] = GameObject.Find("PermanentPath2 (" +(i) +")");
+        }
+
         controls = GameObject.Find("Controls");
 
         controls.SetActive(false);
         Clocks.SetActive(false); 
         Arrows.SetActive(false); 
         badcoins.SetActive(false);
+
+
+        rev.SetActive(false); 
+        rev2.SetActive(false); 
+        cl.SetActive(false);
+        cl2.SetActive(false);
 
     }
 
@@ -145,6 +164,7 @@ public class tutorialController : MonoBehaviour
             Left.text = tuText[19];
             if(Input.GetKeyUp(KeyCode.Space))
             {
+                
                 sCoins();
             }
         }
@@ -533,13 +553,9 @@ public class tutorialController : MonoBehaviour
 
     public void sCoins()
     {
-        for(int i = 0; i < 18; i++)
-        {
-            coinP1[i] = GameObject.Find("PermanentPath (" +(i) +")");
-            coinP2[i] = GameObject.Find("PermanentPath2 (" +(i) +")");
-        }
         
-
+        
+        power.Play();
         location1 = Random.Range(0,17);
         
 

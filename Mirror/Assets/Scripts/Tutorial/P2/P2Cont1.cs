@@ -327,6 +327,7 @@ public class P2Cont1 : MonoBehaviour
 
         if(col.tag == "Coin")
         {
+            tutorialController.coi.Play();
              tutorialController.location2 = Random.Range(0,17);
             
 
@@ -374,7 +375,9 @@ public class P2Cont1 : MonoBehaviour
     public IEnumerator clock()
     {
         freeze = true;
+        tutorialController.cl2.SetActive(true);
         yield return new WaitForSeconds(5f);
+        tutorialController.cl2.SetActive(false);
         freeze = false;
         StopCoroutine(clock());
     }
@@ -382,8 +385,10 @@ public class P2Cont1 : MonoBehaviour
     public IEnumerator arrows()
     {
         reverse = true;
-        
-        yield return new WaitForSeconds(10f);
+        tutorialController.rev2.SetActive(true);
+        yield return new WaitForSeconds(.5f);
+        tutorialController.rev2.SetActive(false);
+        yield return new WaitForSeconds(9.5f);
         reverse = false;
         
         StopCoroutine(arrows());
