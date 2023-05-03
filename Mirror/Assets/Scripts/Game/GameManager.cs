@@ -139,10 +139,18 @@ public class GameManager : MonoBehaviour
 
             
 
-            if(pauseTime1 == false)
+            /*if(pauseTime1 == false)
             {
-                pathTime1 += Time.deltaTime;
+                
             }
+
+            if(pauseTime2 == false)
+            {
+                
+            }*/
+
+            pathTime1 += Time.deltaTime;
+            pathTime2 += Time.deltaTime;
             
 
             if(pathTime1 >= 5)
@@ -151,10 +159,8 @@ public class GameManager : MonoBehaviour
                 ranPaths1();
             }
 
-            if(pauseTime2 == false)
-            {
-                pathTime2 += Time.deltaTime;
-            }
+            
+            
             
 
             if(pathTime2 >= 5)
@@ -253,13 +259,13 @@ public class GameManager : MonoBehaviour
         else if(randomPUp == 3)
         {
             List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 33; i < 66; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            for(int i = 33; i < 66; i++)
+            for(int i = 0; i < 33; i++)
             {
                 powerLo.Add(coinP1[i]);
+            }
+            for(int i = 0; i < 33; i++)
+            {
+                powerLo.Add(coinP2[i]);
             }
             powerUpLoc = Random.Range(0f,65f);
             Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);

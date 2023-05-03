@@ -9,12 +9,22 @@ public class rPaths : MonoBehaviour
 
     public bool closed;
 
+    public bool sWhite;
+
     
     // Start is called before the first frame update
     void Start()
     {
         spRend = GetComponent<SpriteRenderer>();
         Coll = GetComponent<Collider2D>();
+        if(sWhite)
+        {
+            spRend.color = Color.white;
+        }
+        else
+        {
+            spRend.color = Color.black;
+        }
         
 
         
@@ -25,13 +35,33 @@ public class rPaths : MonoBehaviour
     {
         if(closed)
         {
-            spRend.enabled = false;
+            if(sWhite)
+            {
+                spRend.color = Color.black;
+            }
+            else
+            {
+                spRend.color = Color.white;
+            }
+            
+            
             Coll.isTrigger = false;
         }
         else
         {
+            if(sWhite)
+            {
+                spRend.color = Color.white;
+            }
+            else
+            {
+                spRend.color = Color.black;
+            }
+
             Coll.isTrigger = true;
-            spRend.enabled = true;
+            
         }
+
+        
     }
 }

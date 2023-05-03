@@ -404,7 +404,7 @@ public class PlayerController : MonoBehaviour
     {
         
         inputDelay = true;
-        yield return new WaitForSeconds(.05f);
+        yield return new WaitForSeconds(.08f);
         inputDelay = false;
         
         StopCoroutine(delayInput());
