@@ -37,6 +37,18 @@ public class sceneChange : MonoBehaviour
         StartCoroutine(TitleDelay());
     }
 
+    public void endGame()
+    {
+        StartCoroutine(end());
+    }
+
+    public IEnumerator end()
+    {
+        yield return new WaitForSeconds(.3f);
+        Application.Quit();
+        StopCoroutine(TitleDelay());
+    }
+
     public IEnumerator TitleDelay()
     {
         yield return new WaitForSeconds(.3f);

@@ -55,11 +55,13 @@ public class tutorialController : MonoBehaviour
     public GameObject scCont;
 
     //Sounds 
-    public AudioSource power,coi;
+    public AudioSource power, coi, unPause;
 
 
     //power ups
     public GameObject rev,rev2,cl,cl2;
+
+    
 
 
     // Start is called before the first frame update
@@ -130,6 +132,8 @@ public class tutorialController : MonoBehaviour
             if(Input.GetKeyUp(KeyCode.Space))
             {
                  startPaths = true;
+                 ranPaths1();
+                 ranPaths2();
             }
         }
         else if(textNum == 7)
@@ -377,7 +381,11 @@ public class tutorialController : MonoBehaviour
         {
             if(!pause)
             {
-                if(textNum!=17 || textNum!=20)
+                if(textNum==17 || textNum==20)
+                {
+                   
+                }
+                else
                 {
                     if(textNum<28)
                     {
@@ -393,6 +401,7 @@ public class tutorialController : MonoBehaviour
         {
             if(pause)
             {
+                unPause.Play();
                 pause = false;
             }
             else
@@ -405,6 +414,7 @@ public class tutorialController : MonoBehaviour
         {
             if(pause)
             {
+                unPause.Play();
                 pause = false;
             }
             else
@@ -452,104 +462,7 @@ public class tutorialController : MonoBehaviour
   
     }
 
-    /*public void pow()
-    {
-        powerTimer = 0f;
-        randomPUp = Random.Range(0,5);
-
-        if(randomPUp == 0)
-        {
-            List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 33; i < 66; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            for(int i = 33; i < 66; i++)
-            {
-                powerLo.Add(coinP1[i]);
-            }
-            powerUpLoc = Random.Range(0f,65f);
-            Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
-
-            
-
-            
-        }
-
-        else if(randomPUp == 1)
-        {
-            List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 33; i < 66; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            for(int i = 33; i < 66; i++)
-            {
-                powerLo.Add(coinP1[i]);
-            }
-            powerUpLoc = Random.Range(0f,65f);
-            Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
-
-            
-
-            
-        }
-
-        else if(randomPUp == 2)
-        {
-            List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 0; i < 33; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            for(int i = 0; i < 33; i++)
-            {
-                powerLo.Add(coinP1[i]);
-            }
-            powerUpLoc = Random.Range(0f,65f);
-            Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
-
-            
-
-            
-        }
-
-        else if(randomPUp == 3)
-        {
-            List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 0; i < 33; i++)
-            {
-                powerLo.Add(coinP1[i]);
-            }
-            for(int i = 0; i < 33; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            powerUpLoc = Random.Range(0f,65f);
-            Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
-
-
-            
-        }
-        else if(randomPUp == 4)
-        {
-            List<GameObject>powerLo = new List<GameObject>();
-            for(int i = 0; i < 66; i++)
-            {
-                powerLo.Add(coinP2[i]);
-            }
-            for(int i = 0; i < 66; i++)
-            {
-                powerLo.Add(coinP1[i]);
-            }
-            Debug.Log(powerLo.Count);
-            powerUpLoc = Random.Range(0f,131f);
-            Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
-
-
-            
-        }
-    }*/
+    
 
     public void sCoins()
     {

@@ -27,6 +27,8 @@ public class P1Cont1 : MonoBehaviour
     //Raycasts
     public float castDist;
 
+    public AudioSource bump;
+
 
     // Start is called before the first frame update
     void Start()
@@ -89,6 +91,16 @@ public class P1Cont1 : MonoBehaviour
                                     
                                 }
                             }
+                            else if(!up&&!up1)
+                            {
+                                if(Input.GetKey("up"))
+                                {
+                                    
+                                    bump.Play();
+                                    
+                                }
+                            }
+
                             
                             if(left&&left1)
                             {
@@ -98,6 +110,15 @@ public class P1Cont1 : MonoBehaviour
                                     rb.velocity = new Vector2(-speed, 0);
                                     rb2.velocity = new Vector2(speed, 0);
                                     canMove = false;
+                                    
+                                }
+                            }
+                            else if(!left&&!left1)
+                            {
+                                if(Input.GetKey("left"))
+                                {
+                                    
+                                    bump.Play();
                                     
                                 }
                             }
@@ -114,6 +135,15 @@ public class P1Cont1 : MonoBehaviour
                                     
                                 }
                             }
+                            else if(!down&&!down1)
+                            {
+                                if(Input.GetKey("down"))
+                                {
+                                    
+                                    bump.Play();
+                                    
+                                }
+                            }
 
                             if(right&&right1)
                             {
@@ -123,6 +153,15 @@ public class P1Cont1 : MonoBehaviour
                                     rb.velocity = new Vector2(speed, 0);
                                     rb2.velocity = new Vector2(-speed, 0);
                                     canMove = false;
+                                    
+                                }
+                            }
+                            else if(!right&&!right1)
+                            {
+                                if(Input.GetKey("right"))
+                                {
+                                    
+                                    bump.Play();
                                     
                                 }
                             }
@@ -140,6 +179,15 @@ public class P1Cont1 : MonoBehaviour
                                     
                                 }
                             }
+                            else if(!up&&!up1)
+                            {
+                                if(Input.GetKey("down"))
+                                {
+                                    
+                                    bump.Play();
+                                    
+                                }
+                            }
                             
                             if(left&&left1)
                             {
@@ -152,6 +200,16 @@ public class P1Cont1 : MonoBehaviour
                                     
                                 }
                             }
+                            else if(!right&&!right1)
+                            {
+                                if(Input.GetKey("right"))
+                                {
+                                    
+                                    bump.Play();
+                                    
+                                }
+                            }
+
 
                             if(down&&down1)
                             {
@@ -165,6 +223,15 @@ public class P1Cont1 : MonoBehaviour
                                     
                                 }
                             }
+                            else if(!down&&!down1)
+                            {
+                                if(Input.GetKey("up"))
+                                {
+                                    
+                                    bump.Play();
+                                    
+                                }
+                            }
 
                             if(right&&right1)
                             {
@@ -174,6 +241,15 @@ public class P1Cont1 : MonoBehaviour
                                     rb.velocity = new Vector2(speed, 0);
                                     rb2.velocity = new Vector2(-speed, 0);
                                     canMove = false;
+                                    
+                                }
+                            }
+                            else if(!right&&!right1)
+                            {
+                                if(Input.GetKey("left"))
+                                {
+                                    
+                                    bump.Play();
                                     
                                 }
                             }

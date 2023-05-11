@@ -60,7 +60,9 @@ public class GameManager : MonoBehaviour
 
     //power ups
     public GameObject rev,rev2,cl,cl2;
-     public AudioSource coi; 
+     public AudioSource coi,unPause; 
+
+    public bool end;
     
     
     
@@ -125,6 +127,7 @@ public class GameManager : MonoBehaviour
         {
             if(pause)
             {
+                unPause.Play();
                 pause = false;
             }
             else
@@ -137,6 +140,7 @@ public class GameManager : MonoBehaviour
         {
             if(pause)
             {
+                unPause.Play();
                 pause = false;
             }
             else
@@ -181,14 +185,29 @@ public class GameManager : MonoBehaviour
                     if(coinCount1>coinCount2)
                     {
                         timer.text = "P1 wins!";
+                        p1CC.text = "P1 wins!";
+                        p2CC.text = "P1 wins!";
+                        timer.GetComponent<Animator>().SetBool("Winner", true);
+                        p1CC.GetComponent<Animator>().SetBool("Winner", true);
+                        p2CC.GetComponent<Animator>().SetBool("Winner", true);
                     }
                     else if(coinCount1<coinCount2)
                     {
                         timer.text = "P2 wins!";
+                        p1CC.text = "P2 wins!";
+                        p2CC.text = "P2 wins!";
+                        timer.GetComponent<Animator>().SetBool("Winner", true);
+                        p1CC.GetComponent<Animator>().SetBool("Winner", true);
+                        p2CC.GetComponent<Animator>().SetBool("Winner", true);
                     }
                     else
                     {
                         timer.text = "Wow its a tie!";
+                        p1CC.text = "Wow its a tie!";
+                        p2CC.text = "Wow its a tie!";
+                        timer.GetComponent<Animator>().SetBool("Winner", true);
+                        p1CC.GetComponent<Animator>().SetBool("Winner", true);
+                        p2CC.GetComponent<Animator>().SetBool("Winner", true);
                     }
                 }
                 
@@ -345,7 +364,7 @@ public class GameManager : MonoBehaviour
             {
                 powerLo.Add(coinP1[i]);
             }
-            Debug.Log(powerLo.Count);
+            
             powerUpLoc = Random.Range(0f,131f);
             Instantiate(powerUp[(int) randomPUp], new Vector3(powerLo[(int) powerUpLoc].transform.position.x, powerLo[(int) powerUpLoc].transform.position.y, powerLo[(int) powerUpLoc].transform.position.z), Quaternion.identity);
 
