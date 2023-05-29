@@ -76,7 +76,7 @@ public class tutorialController : MonoBehaviour
             coinP2[i] = GameObject.Find("PermanentPath2 (" +(i) +")");
         }
 
-        controls = GameObject.Find("Controls");
+        
 
         controls.SetActive(false);
         Clocks.SetActive(false); 

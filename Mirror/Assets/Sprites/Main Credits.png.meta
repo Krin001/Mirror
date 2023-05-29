@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 627ef66d20ddfb3429c3fa5368555998
+guid: b2e91808c7b71be45a91718d32439c50
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -163,61 +163,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Quit_0
-      rect:
-        serializedVersion: 2
-        x: 273
-        y: 220
-        width: 286
-        height: 289
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: 77.12384, y: -121.173294}
-        - {x: 52.254547, y: -134.4035}
-        - {x: 22.73767, y: -142.88777}
-        - {x: -6.239868, y: -144.5}
-        - {x: -32.059387, y: -141.08975}
-        - {x: -56.695312, y: -132.11424}
-        - {x: -77.3642, y: -121.4194}
-        - {x: -101.02884, y: -102.45114}
-        - {x: -122.2486, y: -73.394165}
-        - {x: -132.28561, y: -52.75415}
-        - {x: -139.74701, y: -23.907532}
-        - {x: -143, y: 5.712036}
-        - {x: -137.44, y: 36.315918}
-        - {x: -128.37686, y: 61.32495}
-        - {x: -117.735504, y: 80.217865}
-        - {x: -106.52368, y: 94.94501}
-        - {x: -92.04358, y: 109.203674}
-        - {x: -68.57077, y: 125.680084}
-        - {x: -50.032135, y: 134.51529}
-        - {x: -25.555511, y: 141.35117}
-        - {x: -2.0450745, y: 144.5}
-        - {x: 29.30841, y: 140.79263}
-        - {x: 54.250793, y: 132.87079}
-        - {x: 81.914215, y: 117.50769}
-        - {x: 102.33069, y: 99.215546}
-        - {x: 118.25067, y: 79.42444}
-        - {x: 132.83704, y: 53.185577}
-        - {x: 139.26294, y: 28.627289}
-        - {x: 143, y: -1.8713074}
-        - {x: 139.8872, y: -27.571045}
-        - {x: 133.14636, y: -52.281372}
-        - {x: 117.047485, y: -82.308014}
-        - {x: 101.04004, y: -102.14993}
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d97677b8a1279d14c9c131e956397ec9
-      internalID: 1882240352
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -228,8 +174,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Quit_0: 1882240352
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

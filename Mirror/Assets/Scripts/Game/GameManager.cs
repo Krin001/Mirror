@@ -43,10 +43,10 @@ public class GameManager : MonoBehaviour
     public string timeLeft = "Time left: 180 second";
 
     public TMP_Text p1CC;
-    public string play1CC = "P1 Coins: = 0";
+    public string play1CC = "P1 Coins: 0";
 
     public TMP_Text p2CC;
-    public string play2CC = "P2 Coins: = 0";
+    public string play2CC = "P2 Coins: 0";
 
     //Starting timer
     public GameObject startingTime;
@@ -158,9 +158,9 @@ public class GameManager : MonoBehaviour
             controls.SetActive(false);
         }
 
-        p1CC.text = "P1 Coins: = " + coinCount1;
+        p1CC.text = "P1 Coins: " + coinCount1;
 
-        p2CC.text = "P2 Coins: = " + coinCount2;
+        p2CC.text = "P2 Coins: " + coinCount2;
 
         if(!pause)
         {

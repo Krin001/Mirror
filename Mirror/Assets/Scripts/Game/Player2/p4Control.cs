@@ -160,19 +160,13 @@ public class p4Control : MonoBehaviour
 
         
 
-        /*Debug.DrawRay(center, Vector2.right * right.distance, Color.red);
+        Debug.DrawRay(center, Vector2.right * right.distance, Color.red);
 
         Debug.DrawRay(center, -Vector2.right * left.distance, Color.red);
 
         Debug.DrawRay(center, Vector2.up * up.distance, Color.red);
 
-        Debug.DrawRay(center, -Vector2.up * down.distance, Color.red);*/
-
-        /*Debug.DrawRay(center, transform.right * -(left.distance), Color.red);
-
-        Debug.DrawRay(center, transform.up * up.distance, Color.red);
-
-        Debug.DrawRay(center, transform.forward * -(down.distance), Color.red);*/
+        Debug.DrawRay(center, -Vector2.up * down.distance, Color.red);
 
 
     }
